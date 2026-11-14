@@ -62,11 +62,33 @@ test('Verify PATCH request partially updates post and returns 200', async ({ req
 });
 
 
-test('Verify DELETE request removes post and returns 200', async ({ request }) => {
-    // 1. Send DELETE request targeting a specific existing ID (/posts/1)
-    const deleteResponse = await request.delete('https://jsonplaceholder.typicode.com/posts/1');
+test('Verify DELETE request is success and returns 200', async ({ request }) => {
+    const response = await request.delete('https://jsonplaceholder.typicode.com/posts/1');
 
-    // 2. Verify status code is 200 (OK)
-    expect(deleteResponse.status()).toBe(200);
+    expect(response.status()).toBe(200);
 });
+
+test('Verify GET non-existent user returns 404 Not Found', async ({ request }) => {
+    // 1. Request a user ID that does not exist on the server (/users/9999)
+    const response = await request.get('https://jsonplaceholder.typicode.com/posts/9999');
+
+    // 2. Assert that the server properly rejects it with 404
+
+    console.log('Status:', response.status());
+    expect(response.status()).toBe(404);
+});
+
+test('Verify API request with Authorization Bearer header', async ({ request }) => {
+    // 1. Send a GET request with an options object containing 'headers'
+    const response = await request.get('https://jsonplaceholder.typicode.com/users/1', {
+        headers: {
+            'Authorization': 'Bearer my-sample-jwt-token-123',
+            'Accept': 'application/json',
+        },
+    });
+
+    // 2. Verify the server accepts the request and returns 200
+    expect(response.status()).toBe(200);
+});
+
 
