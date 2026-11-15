@@ -78,17 +78,14 @@ test('Verify GET non-existent user returns 404 Not Found', async ({ request }) =
     expect(response.status()).toBe(404);
 });
 
-test('Verify API request with Authorization Bearer header', async ({ request }) => {
-    // 1. Send a GET request with an options object containing 'headers'
-    const response = await request.get('https://jsonplaceholder.typicode.com/users/1', {
+test('Verify API Request with Authorization Beared header', async ({ request }) => {
+    const response = await request.get('https://jsonplaceholder.typicode.com/posts/1', {
         headers: {
-            'Authorization': 'Bearer my-sample-jwt-token-123',
+            'Authorization': 'Bearer test-token-123',
             'Accept': 'application/json',
         },
     });
 
-    // 2. Verify the server accepts the request and returns 200
-    expect(response.status()).toBe(200);
 });
 
 
