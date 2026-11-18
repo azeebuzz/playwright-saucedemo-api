@@ -23,8 +23,16 @@ npx playwright test
 
 The tests are in `tests/`:
 
-- `saucedemo_login.spec.ts` and `saucedemo_cart.spec.ts` cover browser workflows.
+- `saucedemo.spec.ts` covers SauceDemo login, error handling, sorting, and cart
+  workflows using the Page Object Model.
+- `saucedemo_login.spec.ts` and `saucedemo_cart.spec.ts` cover additional
+  direct browser workflows.
 - `api_test.spec.ts` covers JSONPlaceholder API requests.
+
+The SauceDemo Page Object classes are in `pages/`:
+
+- `LoginPage.ts` handles navigation and login actions.
+- `InventoryPage.ts` handles the inventory sort and add-to-cart actions.
 
 The browser tests access SauceDemo and the API tests access JSONPlaceholder, so
 those services must be reachable when the tests run.
