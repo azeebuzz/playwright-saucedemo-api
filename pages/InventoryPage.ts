@@ -5,6 +5,7 @@ export class InventoryPage {
     readonly pageTitle: Locator;
     readonly cartBadge: Locator;
     readonly addToCartButton: Locator;
+    readonly cartButton: Locator;
     readonly sortDropdown: Locator;
 
     constructor(page: Page) {
@@ -13,6 +14,7 @@ export class InventoryPage {
         this.addToCartButton = page.getByRole('button', { name: 'Add to cart' });
         this.sortDropdown = page.locator('[data-test="product-sort-container"]');
         this.cartBadge = page.locator('[data-test="shopping-cart-badge"]');
+        this.cartButton = page.locator('[data-test="shopping-cart-link"]');
     }
 
     async lowToHighSort() {
@@ -22,4 +24,9 @@ export class InventoryPage {
     async firstAddToCart() {
         await this.addToCartButton.first().click();
     }
+
+    async openCart() {
+        await this.cartButton.click();
+    }
+
 }
